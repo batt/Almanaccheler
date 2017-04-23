@@ -5,6 +5,7 @@
   "author": "Francesco Sacchi <batt@develer.com>",
   "description": "Carte del mercante in fiera!",
   "dependencies": {
+    "cron": "~1.0.4",
     "hubot": "^2.19.0",
     "hubot-diagnostics": "0.0.1",
     "hubot-google-images": "^0.2.6",
