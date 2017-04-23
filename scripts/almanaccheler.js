@@ -15,7 +15,7 @@ module.exports = function (robot) {
   var room = "fernandello_test"
 
   var CronJob = require('cron').CronJob;
-  var job = new CronJob('0,15,30,45 * * * * *', function() {
+  var job = new CronJob('00 41 16 * * *', function() {
     robot.http(list_url).get()(function(err, resp, body) {
         if (err) {
           robot.messageRoom(room, err);
