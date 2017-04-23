@@ -16,16 +16,18 @@ module.exports = function (robot) {
   var CronJob = require('cron').CronJob;
   var job = new CronJob('00 30 09 * * 1-5', function() {
       var img_list = robot.brain.get('img_list') || null;
-      if (img_list === null)
+      if (img_list === null) {
         return;
+      }
 
       var idx = robot.brain.get('img_idx');
       var max_idx= robot.brain.get('img_cnt');
 
       robot.messageRoom(room, img_list[idx]);
       idx++;
-      if (idx >= max_idx)
+      if (idx >= max_idx) {
         idx = 0;
+      }
       robot.brain.set('img_idx', idx);
     }, function () {
       /* This function is executed when the job stops */
@@ -53,13 +55,14 @@ module.exports = function (robot) {
         if (err) {
           res.reply(err);
         }
-        else
+        else {
           var img = body.split('\n');
           img = shuffle(img);
           robot.brain.set('img_list', img);
           robot.brain.set('img_idx', 0);
           robot.brain.set('img_cnt', img.length);
           res.reply("Caricate " + img.length + " immagini:\n" + img.join('\n'));
+        }
       });
   });
 
