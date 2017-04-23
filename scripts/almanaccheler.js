@@ -14,7 +14,7 @@ module.exports = function (robot) {
   var room = "fernandello_test"
 
   var CronJob = require('cron').CronJob;
-  var job = new CronJob('0,15,30,45 * * 1-5', function() {
+  var job = new CronJob('00 30 09 * * 1-5', function() {
       var img_list = robot.brain.get('img_list') || null;
       if (img_list === null)
         return;
