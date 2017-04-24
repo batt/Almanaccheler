@@ -66,16 +66,27 @@ module.exports = function (robot) {
       });
   });
 
+  var randomImg = function(res) {
+    var img_list = robot.brain.get('img_list') || null;
+    if (img_list === null) {
+      res.reply("Immagini non impostate!");
+      return;
+    }
+    var rnd = Math.floor(Math.random()*img_list.length);
+    res.reply(img_list[rnd]);
+  }
+  
+
   robot.respond(/pug bomb/i, function (res) {
-    res.reply(res.random(frasi));
+    randomImg(res);
   });
 
   robot.respond(/pug me/i, function (res) {
-    res.reply(res.random(frasi));
+    randomImg(res);
   });
 
   robot.respond(/ciao/i, function (res) {
-    res.reply("wewe");
+    randomImg(res);
   });
 
   robot.respond(/dici (.*)/i, function (res) {
