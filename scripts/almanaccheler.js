@@ -11,7 +11,7 @@
 
 module.exports = function (robot) {
 
-  var room = "fernandello_test"
+  var room = "G4GJDGVE3"
 
   var CronJob = require('cron').CronJob;
   var job = new CronJob('00 30 09 * * 1-5', function() {
