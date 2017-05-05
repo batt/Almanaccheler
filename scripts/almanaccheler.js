@@ -11,10 +11,10 @@
 
 module.exports = function (robot) {
 
-  var room = "G4GJDGVE3"
+  var room = "C02AN2FPY" // chat_random
 
   var CronJob = require('cron').CronJob;
-  var job = new CronJob('00 30 * * * 1-5', function() {
+  var job = new CronJob('00 30 09 * * 1-5', function() {
       var img_list = robot.brain.get('img_list') || null;
       if (img_list === null) {
         return;
@@ -66,14 +66,19 @@ module.exports = function (robot) {
       });
   });
 
-  var randomImg = function(res) {
+  var randomImg = function(res, chat_room) {
     var img_list = robot.brain.get('img_list') || null;
     if (img_list === null) {
       res.reply("Immagini non impostate!");
       return;
     }
     var rnd = Math.floor(Math.random()*img_list.length);
-    res.reply(img_list[rnd]);
+    if (chat_room != null) {
+      res.reply(img_list[rnd]);
+    }
+    else {
+      robot.messageRoom(chat_room, img_list[rnd]);
+    }
   }
   
 
@@ -87,6 +92,11 @@ module.exports = function (robot) {
 
   robot.respond(/ciao/i, function (res) {
     randomImg(res);
+  });
+
+  robot.respond(/post (.*)/i, function (res) {
+    var chat_room = res.match[1].trim();
+    randomImg(res, chat_room);
   });
 
   robot.respond(/dici (.*)/i, function (res) {
