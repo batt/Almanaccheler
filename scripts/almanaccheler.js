@@ -73,7 +73,7 @@ module.exports = function (robot) {
       return;
     }
     var rnd = Math.floor(Math.random()*img_list.length);
-    if (chat_room != null) {
+    if (chat_room === null) {
       res.reply(img_list[rnd]);
     }
     else {
